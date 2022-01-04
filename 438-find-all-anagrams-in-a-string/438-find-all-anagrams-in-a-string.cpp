@@ -2,8 +2,9 @@ class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
         int l=0,r=0;
-        vector<int> cnt(26,0);
-         vector<int> cnt1(26,0);
+        // vector<int> cnt(26,0);
+        //  vector<int> cnt1(26,0);
+        unordered_map<int,int> cnt,cnt1;
         for(auto &el : p) {cnt[el-'a']++; cnt1[el-'a']++;}
         int n = s.size(),n1=p.size();
         vector<int> ans;
