@@ -7,7 +7,7 @@ public:
         int ans = nums[0];
         for(int i=1;i<n;i++)
         {
-            if(i>k && dq.front() == dp[i-k-1]) dq.pop_front();
+            if(i>k && dq[0] == dp[i-k-1]) dq.pop_front();
             dp.push_back(max(nums[i],dq[0]+nums[i]));
             ans = max(dp[i],ans);
             while(!dq.empty() && dq.back() < dp[i])dq.pop_back();
