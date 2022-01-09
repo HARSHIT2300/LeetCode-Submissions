@@ -10,7 +10,7 @@ public:
             if(i>k && dq.front() == dp[i-k-1]) dq.pop_front();
             dp.push_back(max(nums[i],dq[0]+nums[i]));
             ans = max(dp[i],ans);
-            while(dq.size() && dq.back() < dp[i])dq.pop_back();
+            while(!dq.empty() && dq.back() < dp[i])dq.pop_back();
             dq.push_back(dp[i]);
         }
         return ans;
