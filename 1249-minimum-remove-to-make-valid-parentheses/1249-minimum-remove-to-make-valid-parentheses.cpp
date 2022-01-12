@@ -12,7 +12,7 @@ public:
             }
             else if(s[i] == ')')
             {
-                if(st.empty()) cb[i]++;
+                if(st.empty()) s[i] = '*';
                 else st.pop();
             }
             else
@@ -20,12 +20,12 @@ public:
                 continue;
             }
         }
-        while(!st.empty()){ ob[st.top()]++; st.pop();}
+        while(!st.empty()){ s[st.top()] = '*'; st.pop();}
         string ans = "";
        // cout<<cb<<" "<<ob<<" ";
         for(int i=0;i<n;i++)
         {
-          if(ob[i] || cb[i]) continue;
+          if(s[i] == '*') continue;
             else ans +=s[i];
         }
         return ans;
