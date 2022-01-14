@@ -1,0 +1,1 @@
+stack willcontain indexes of those characters which willbe unbalanced
