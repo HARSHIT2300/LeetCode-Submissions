@@ -1,0 +1,1 @@
+https://leetcode.com/problems/count-submatrices-with-all-ones/discuss/1335412/Easy-C%2B%2B-solution-oror-commented
