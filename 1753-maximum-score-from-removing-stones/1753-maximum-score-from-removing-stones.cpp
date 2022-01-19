@@ -8,9 +8,9 @@ public:
         {
             int a=pq.top(); pq.pop(); 
             int b = pq.top(); pq.pop();
-            a--; b--;
-            if(a) pq.push(a); 
-            if(b) pq.push(b);
+          //  a--; b--;
+            if(--a) pq.push(a); 
+            if(--b) pq.push(b);
             ans++;
         }
         return ans;
