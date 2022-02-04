@@ -19,7 +19,8 @@ public:
             k1--; fast = fast->next;
         }
         slow1  = fast;
-        while(fast->next)
+        fast = fast->next;
+        while(fast)
         {
             slow = slow->next;
             fast = fast->next;
