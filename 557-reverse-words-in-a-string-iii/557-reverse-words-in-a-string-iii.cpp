@@ -1,15 +1,19 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        for (int i = 0; i < s.length(); i++) {
-            if (s[i] != ' ') {   // when i is a non-space
-                int j = i;
-                for (; j < s.length() && s[j] != ' '; j++) { } // move j to the next space
-                reverse(s.begin() + i, s.begin() + j);
-                i = j - 1;
+        int n=s.size();
+        s+=" ";
+        string s1="",ans="";
+        for(int i=0;i<=n;i++)
+        {
+            if(s[i] == ' ')
+            {
+                ans+=s1;
+                if(i==n) break;
+                ans+=" "; s1="";
             }
+            else s1=s[i]+s1;
         }
-        
-        return s;
+        return ans;
     }
 };
