@@ -1,34 +1,43 @@
-// just to check
-
 class Solution {
 public:
-int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
-int res = 1;
-int row = grid.size();
-if (row == 0) return -1;
-int col = grid[0].size();
-if (col == 0 ) return -1;
-if (grid[0][0] != 0 | grid[row-1][col-1] != 0) return -1;
-
-    queue<pair<int, int>> queue;
-    queue.push(make_pair(0,0));
-    vector<vector<int>> directions = {{1,1}, {0,1},{1,0},{0,-1},{-1,0},{-1, -1},{1, -1},{-1, 1}};
-    grid[0][0] = 1;
-    while(!queue.empty()){
-        auto curr = queue.front();
-        int x = curr.first, y = curr.second;
-        if( x == row -1 && y == col -1) return grid[x][y];
-        
-        for(auto direction : directions){
-            int nx = x + direction[0];
-            int ny = y + direction[1];
-            if(nx >= 0 && nx < row && ny >= 0 && ny < col && grid[nx][ny] == 0){
-                queue.push(make_pair(nx,ny));
-                grid[nx][ny] = grid[x][y] + 1;
+    bool isValid(int x,int y,int &n)
+    {
+        if(x>=0&&x<n&&y>=0&&y<n) return true;
+        else return false;
+    }
+  int ch[8][2] ={{1,1}, {0,1},{1,0},{0,-1},{-1,0},{-1, -1},{1, -1},{-1, 1}};
+  
+    int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
+        int n = grid.size();
+        if(grid[0][0] || grid[n-1][n-1]) return -1;
+        int ans=0;
+        int dis[n][n];
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                dis[i][j]=grid[i][j];
             }
         }
-        queue.pop();
+      queue<pair<int,int>> q;
+        q.push({0,0}); dis[0][0]=1;
+        int f=0;
+        while(!q.empty())
+        {
+            int x = q.front().first,y=q.front().second;
+            q.pop(); int chx,chy;
+              if(x == n-1 && y == n-1){return dis[x][y];}
+            for(int i=0;i<8;i++)
+            {
+                chx = x+ch[i][0],chy=y+ch[i][1];
+                if(isValid(chx,chy,n) && !grid[chx][chy] && dis[chx][chy] == 0)
+                {   q.push({chx,chy});
+                    dis[chx][chy] = dis[x][y]+1;
+                 
+                }
+            }
+        }
+       // cout<<dis[n-1][n-1]<<" ";
+        return dis[n-1][n-1]!=0 ? dis[n-1][n-1] : -1;
     }
-    return -1;
-}
 };
