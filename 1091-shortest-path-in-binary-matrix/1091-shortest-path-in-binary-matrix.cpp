@@ -5,7 +5,7 @@ public:
         if(x>=0&&x<n&&y>=0&&y<n) return true;
         else return false;
     }
-  int ch[8][2] ={{1,1}, {0,1},{1,0},{0,-1},{-1,0},{-1, -1},{1, -1},{-1, 1}};
+  int ch[8][2] ={{0,1},{1,0},{1,1},{0,-1},{-1,0},{-1,-1},{-1,1},{1,-1}};
   
     int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
         int n = grid.size();
