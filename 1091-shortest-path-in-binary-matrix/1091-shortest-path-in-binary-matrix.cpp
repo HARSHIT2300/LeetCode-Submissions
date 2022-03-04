@@ -16,7 +16,7 @@ public:
         {
             for(int j=0;j<n;j++)
             {
-                dis[i][j]=grid[i][j];
+                dis[i][j]=10001;
             }
         }
       queue<pair<int,int>> q;
@@ -30,7 +30,7 @@ public:
             for(int i=0;i<8;i++)
             {
                 chx = x+ch[i][0],chy=y+ch[i][1];
-                if(isValid(chx,chy,n) && !grid[chx][chy] && dis[chx][chy] == 0)
+                if(isValid(chx,chy,n) && !grid[chx][chy] && dis[chx][chy] == 10001)
                 {   q.push({chx,chy});
                     dis[chx][chy] = dis[x][y]+1;
                  
@@ -38,6 +38,6 @@ public:
             }
         }
        // cout<<dis[n-1][n-1]<<" ";
-        return dis[n-1][n-1]!=0 ? dis[n-1][n-1] : -1;
+        return dis[n-1][n-1]!=10001 ? dis[n-1][n-1] : -1;
     }
 };
