@@ -26,7 +26,7 @@ public:
         {
             int x = q.front().first,y=q.front().second;
             q.pop(); int chx,chy;
-              if(x == n-1 && y == n-1){return dis[x][y];}
+           //   if(x == n-1 && y == n-1){return dis[x][y];}
             for(int i=0;i<8;i++)
             {
                 chx = x+ch[i][0],chy=y+ch[i][1];
