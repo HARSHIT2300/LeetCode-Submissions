@@ -1,2 +1,2 @@
-basic bfs approach
-earlier was doin
+basic bfs approach of visiting the nearest adj neighbours,updating their distance, and doing it on and on till we reach (n-1,n-1)
+earlier was doing the mistake of setting initial max dist as 101 whereas the max can be upto 100*100 so setting it upto 10001
