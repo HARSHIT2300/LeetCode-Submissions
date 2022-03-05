@@ -1,2 +1,2 @@
 Here we have 2 islands
-So for any one of the islands encountered first, using a bfs traversal of this
+So for any one of the islands encountered first, using a bfs traversal of this island, we then calculate the distance for all the water/0's next in the next bfs loop and as soon as we reach some index of island2  we update it to our ans as we want the minimum distance
