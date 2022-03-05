@@ -53,8 +53,8 @@ public:
                     dis[chx][chy]=dis[x][y]+1;
                  if(!grid[chx][chy])
                     q1.push({chx,chy});
-                else ans=min(ans,dis[chx][chy]);
-                
+                else //ans=min(ans,dis[chx][chy]);
+                return dis[chx][chy]-1;
             }
             
         }
