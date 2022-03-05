@@ -14,15 +14,8 @@ public:
         for(int i=0;i<m;i++)
         {
             for(int j=0;j<n;j++)
-            {   if(mat[i][j] == 0 || dis[i][j]) continue;
-                for(int k=0;k<4;k++)
-                {       chx = i+ch[k][0],chy = j+ch[k][1];
-                    if(isValid(chx,chy,m,n) && !mat[chx][chy] )
-                    {
-                        dis[i][j]=1; q.push({i,j});
-                        break;
-                    }
-                }
+            {   if(mat[i][j] == 0) q.push({i,j});
+               
             }
         }
         while(!q.empty())
