@@ -18,7 +18,7 @@ public:
         {
             if(vis[i]) continue;
             cc++;
-            int cn=0,te=0;
+           
             queue<int> q;
             q.push(i);
             vis[i]=1;
@@ -26,21 +26,16 @@ public:
             {
                 int curr = q.front();
                 q.pop();
-                cn++;
+            
                 for(auto node : adj[curr])
                 {
-                  te++;
+               
                     if(!vis[node]) {q.push(node);vis[node]=1;}
                 }
                  
             }
-           
-            te/=2;
-           
-            ed+=(te-(cn-1));
         }
        
-        if(cc-1 > ed) return -1;
-        else return cc-1;
+         return cc-1;
     }
 };
