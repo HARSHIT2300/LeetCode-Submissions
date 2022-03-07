@@ -2,6 +2,7 @@ class Solution {
 public:
     int makeConnected(int n, vector<vector<int>>& connections) {
         // BFS
+        if(connections.size()<n-1) return -1;
         int cc=0,ed=0;
         vector<int> adj[n];
         int a,b;
