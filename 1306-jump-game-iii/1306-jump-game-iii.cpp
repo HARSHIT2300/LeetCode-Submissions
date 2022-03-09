@@ -2,12 +2,12 @@ class Solution {
 public:
     bool dfs(vector<int>& arr,int node,bool vis[])
     {
-     //   if(node<0||node>=arr.size()||vis[node]) return false;
+       if(node<0||node>=arr.size()||vis[node]) return false;
         vis[node]=true;
         //cout<<node<<" ";
         if(arr[node] == 0) return true;
       //  vis[node] =true;
-        if((node+arr[node]<arr.size()&&!vis[node+arr[node]]&&dfs(arr,node+arr[node],vis))||(node-arr[node]>=0&&!vis[node-arr[node]]&&dfs(arr,node-arr[node],vis)))
+        if(dfs(arr,node+arr[node],vis)||dfs(arr,node-arr[node],vis))
             return true;
         return false;
     }
