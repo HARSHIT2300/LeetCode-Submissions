@@ -3,12 +3,13 @@ public:
     int shortestPathLength(vector<vector<int>>& graph) {
         int n = graph.size();
         queue<pair<int,pair<int,int>>> q;
-         set<pair<int,int>> sp;
+         bool vis[n][1<<12];
+        memset(vis,false,sizeof(vis));
         for(int i = 0;i<n;i++)
         {
             int mask_value = 1<<i;
             q.push({i,{mask_value,0}});
-            sp.insert({i,mask_value});
+           vis[i][mask_value]=1;
         }
        
        while(!q.empty())
@@ -18,9 +19,9 @@ public:
            {    
                int res_mask_value = mask_value | (1<<child) ;
                if(res_mask_value == (1<<n)-1) return d+1;
-               if(sp.find({child,res_mask_value}) == sp.end())
+               if(!vis[child][res_mask_value])
                {
-                   sp.insert({child,res_mask_value});
+                   vis[child][res_mask_value]=1;
                    q.push({child,{res_mask_value,d+1}});
                }
            }
