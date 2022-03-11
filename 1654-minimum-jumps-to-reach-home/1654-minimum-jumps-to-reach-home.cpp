@@ -17,7 +17,7 @@ public:
             int a1 = node+a;
         
            cout<<node<<" ";
-            if(a1>=0 && !forbid[a1] &&  !vis[0][a1] && a1<=8000)
+            if(a1>=0 && !forbid[a1] &&  !vis[0][a1] && a1<=6000)
             {
              
                 q.push({a1,{0,d+1}});
