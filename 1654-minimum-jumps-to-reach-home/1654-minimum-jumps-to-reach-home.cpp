@@ -1,43 +1,41 @@
-// another soln just to check
-
-const int inf = 1e6;
-int cache[6005][2];
-int a,b,x;
-int check_forbidden[6005];
-int dp(int cur,int f)
-{
-    // f - > previously how many consecutive backward operation perform.
-    //cur -> cur position of bug.   
-   // stop condition of Memoization
-    if(cur < 0 or cur > 6000 or check_forbidden[cur] or f >= 2) 
-        return inf;
-    if(cur == x)
-        return 0;
-    int &ans = cache[cur][f];
-    if(ans != -1)
-        return ans;
-    // forward operation
-    ans = dp(cur+a,0) + 1;
-    // backward operation 
-    ans = min(ans , dp(cur-b , f+1)+1);
-    return ans;
-	
-}
 class Solution {
 public:
-    int minimumJumps(vector<int>& forbidden, int a1, int b1, int x1) {
-        a = a1,b = b1,x = x1;
-        // initialize  check_forbidden array by zero      
-        memset(check_forbidden,0,sizeof(check_forbidden));
-        // make the position in check_forbidden array 1 where bug cannot jump.     
-        for(auto it : forbidden)
-            check_forbidden[it] = 1;
-        // initialize  cache array by -1 
-        memset(cache,-1,sizeof(cache));
-        int ans = dp(0,0);
-        // means no possible sequence found         
-        if(ans >= inf)
-            ans = -1;
-        return ans;
+    int minimumJumps(vector<int>& forbidden, int a, int b, int x) {
+        queue<pair<int,pair<int,int>>> q;
+        if(x ==0 ) return x;
+        q.push({0,{0,0}});
+        bool forbid[100001];
+        memset(forbid,false,sizeof(forbid));
+        for(auto &el : forbidden)
+            forbid[el] =true;
+        bool vis[2][100001];
+        memset(vis,false,sizeof(vis));
+        vis[0][0] = true;
+        while(!q.empty())
+        {
+            int node = q.front().first,col = q.front().second.first,d=q.front().second.second; q.pop();
+            int a1 = node+a;
+        
+           cout<<node<<" ";
+            if(a1>=0 && !forbid[a1] &&  !vis[0][a1] && a1<=10000)
+            {
+              //  if(a1<x|| (a1>x && a1-b>=x))
+                q.push({a1,{0,d+1}});
+                if(a1 == x) { return d+1;}
+                vis[0][a1]=1;
+            }
+            if(!col){
+           a1 = node-b;
+            if( a1>=0 && !forbid[a1] && !vis[1][a1] )
+            {
+                if(a1 == x){
+                 //   cout<<node<<" "; 
+                    return d+1;}
+                q.push({a1,{1,d+1}});
+                vis[1][a1]=1;
+            }
+            }
+        }
+        return -1;
     }
 };
