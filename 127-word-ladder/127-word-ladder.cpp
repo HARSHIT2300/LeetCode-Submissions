@@ -30,7 +30,7 @@ public:
             for(int i=0;i<n1;i++)
             {   string s = el;
                 for(char ch = 'a';ch<='z';ch++)
-                {
+                {   if(ch == el[i]) continue;
                     s[i] =ch;
                     if(mp[s])
                     {
@@ -40,6 +40,7 @@ public:
                 }
             }
         }
+        // construction of the graph above takes O(M* N*25)
         queue<pair<string,int>> q;
         q.push({beginWord,1}); vis[beginWord]=1;
         while(!q.empty())
