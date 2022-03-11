@@ -17,9 +17,9 @@ public:
             int a1 = node+a;
         
            cout<<node<<" ";
-            if(a1>=0 && !forbid[a1] &&  !vis[0][a1] && a1<=10000)
+            if(a1>=0 && !forbid[a1] &&  !vis[0][a1] && a1<=8000)
             {
-              //  if(a1<x|| (a1>x && a1-b>=x))
+             
                 q.push({a1,{0,d+1}});
                 if(a1 == x) { return d+1;}
                 vis[0][a1]=1;
