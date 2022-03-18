@@ -13,12 +13,12 @@ public:
         a = isPar(a); b = isPar(b);
         if(a == b) return;
         ans--;
-        // if(rank[a]<rank[b])
-             par[a]=b;
-        // else if(rank[b]<rank[a])
-        //     par[b]=a;
-        // else {
-        //     par[b]=a; rank[a]+=1;}
+        if(rank[a]<rank[b])
+            par[a]=b;
+        else if(rank[b]<rank[a])
+            par[b]=a;
+        else {
+            par[b]=a; rank[a]+=1;}
     }
     int gph(int x,int y,int z)
     {
