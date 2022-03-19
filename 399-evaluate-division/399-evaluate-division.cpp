@@ -15,8 +15,9 @@ public:
         {
             string node = nodewt.first; double node_val = nodewt.second;
             if(vis[node]) continue;
-          //  val*=node_val;
-            if(!dfs(node,des,adj,vis,val*node_val,ans)) return false;
+            val*=node_val;
+            if(!dfs(node,des,adj,vis,val,ans)) return false;
+            val/=node_val;
         }
        // val=1.0;
         return true;
@@ -39,7 +40,7 @@ public:
             if(vis.count(edge[0])&&vis.count(edge[1])){
          if(!dfs(edge[0],edge[1],adj,vis,1.0,ans)) ans = -1.0;   
             }
-           cout<<"\n";
+         //  cout<<"\n";
             res.push_back(ans);
             for(auto &el : vis)
             {
