@@ -1,7 +1,9 @@
 class Solution {
 public:
+    // StraightForward Binary Search Solution
     int ch[4][2] = {{0,1},{1,0},{0,-1},{-1,0}};
-    bool dfs(int r,int c,int &m,int &n,vector<vector<int>>& heights,bool vis[101][101],int &val)
+    bool vis[101][101];
+    bool dfs(int r,int c,int &m,int &n,vector<vector<int>>& heights,int &val)
     {
         vis[r][c] =1;
         if(r == m-1 && c == n-1) return true;
@@ -13,7 +15,7 @@ public:
             if(chx>=0&& chx< m && chy>=0 && chy<n){
             if( vis[chx][chy]) continue;
             
-            if(abs(heights[chx][chy]-heights[r][c])<=val && dfs(chx,chy,m,n,heights,vis,val)) return true;
+            if(abs(heights[chx][chy]-heights[r][c])<=val && dfs(chx,chy,m,n,heights,val)) return true;
             }
         }
         return false;
@@ -31,12 +33,12 @@ public:
          }
      }
         int l = 0,h = mx - mn;
-        bool vis[101][101];
+       
         int ans;
         while(l<=h)
         {   memset(vis,false,sizeof(vis));
             int mid = l+((h-l)>>1);
-            if(dfs(0,0,m,n,heights,vis,mid))
+            if(dfs(0,0,m,n,heights,mid))
             {
                 ans = mid; h=mid-1;
             }
