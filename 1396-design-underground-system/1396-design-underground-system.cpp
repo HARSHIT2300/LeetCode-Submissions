@@ -1,5 +1,5 @@
 map<int,pair<string,int>> cust;
-map<pair<string,string>,vector<int>> avg_time;
+map<pair<string,string>,pair<int,int>> avg_time;
 class UndergroundSystem {
 public:
     UndergroundSystem() {
@@ -12,17 +12,14 @@ public:
     
     void checkOut(int id, string stationName, int t) {
         int tm = t - cust[id].second;
-        avg_time[{cust[id].first,stationName}].push_back(tm); 
+        avg_time[{cust[id].first,stationName}].first+=tm;
+        avg_time[{cust[id].first,stationName}].second+=1;
     }
     
     double getAverageTime(string startStation, string endStation) {
-        double sm = 0.0;
-        for(auto &el  : avg_time[{startStation,endStation}])
-        {
-              sm+=el;
-        }
-        sm/=(double)avg_time[{startStation,endStation}].size();
-        return sm;
+     
+        return (double)avg_time[{startStation,endStation}].first/avg_time[{startStation,endStation}].second;
+
     }
 };
 
