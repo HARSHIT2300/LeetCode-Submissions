@@ -67,13 +67,14 @@ public:
             else s+=el;
         }
         v.push_back(s);
-        for(auto &el : v)
-        {
+        for(int i=0;i<v.size();i++)
+        {   string el = v[i];
             if(obj->is_prefix(el)!="\0") ans+=obj->is_prefix(el);
             else ans+=el;
+            if(i != v.size()-1)
             ans+=" ";
         }
-        ans = ans.substr(0,ans.length()-1);
+       // ans = ans.substr(0,ans.length()-1);
         return ans;
     }
 };
