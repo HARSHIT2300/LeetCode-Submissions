@@ -1,1 +1,1 @@
-​
+Simple/Basic Trie Implementation as soon as u find the shortest prefix for any word in sentence, just return it
