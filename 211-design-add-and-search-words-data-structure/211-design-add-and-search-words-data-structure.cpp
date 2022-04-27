@@ -1,98 +1,37 @@
-class Node{
-    public : 
-    Node* link[27];
-    bool flag;
-    Node()
-    {
-        flag = false;
-        for(int i=0;i<=26;i++)
-        {
-            link[i] = NULL;
-        }
-    }
-};
-Node *root;
+// just to see the TC for other soln
 class WordDictionary {
+    vector<WordDictionary*> children;
+    bool isEndOfWord;
 public:
-    WordDictionary() {
-        root = new Node();
+    // Initialize your data structure here. 
+    WordDictionary(): isEndOfWord(false){
+        children = vector<WordDictionary*>(26, nullptr);
     }
     
+    // Adds a word into the data structure. 
     void addWord(string word) {
-        Node* tmp = root;
-        
-        for(auto &el : word)
-        {
-          
-            int pos = el-97;
-             if(el == '.') pos = 26;
-            if(tmp->link[pos] == NULL)
-            {
-                Node *tmp1 = new Node();
-                tmp->link[pos] = tmp1;
-                tmp = tmp1;
-            }
-            else
-                tmp = tmp->link[pos];
-                
+        WordDictionary *curr = this;
+        for(char c: word){
+            if(curr->children[c - 'a'] == nullptr)
+                curr->children[c - 'a'] = new WordDictionary();
+            curr = curr->children[c - 'a'];
         }
-        tmp->flag = true;
+        curr->isEndOfWord = true;
     }
     
+    // Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter. 
     bool search(string word) {
-        int f = 0;
-        Node *tmp = root;
-        for(int i = 0;i<word.length();i++)
-        {
-            if(word[i] == '.')
-            {   bool f = false;
-                for(char ch = 'a';ch<='z';ch++)
-                {
-                    string s1 = word.substr(i+1,word.length()-1-i);
-                   
-                    if( search1(s1,tmp->link[ch-97]))return true;
-                }
-                if(!f) return false;
-                
+        WordDictionary *curr = this;
+        for(int i = 0; i < word.length(); ++i){
+            char c = word[i];
+            if(c == '.'){
+                for(auto ch: curr->children)
+                    if(ch && ch->search(word.substr(i+1))) return true;
+                return false;
             }
-            else
-            {
-                 int pos = word[i] - 97;
-                 if(tmp->link[pos] == NULL) return false;
-                tmp = tmp->link[pos];
-            }
+            if(curr->children[c - 'a'] == nullptr) return false;
+            curr = curr->children[c - 'a'];
         }
-        return tmp->flag == true;
-    }
-    bool search1(string word,Node *tmp)
-    {
-        if(tmp == NULL) return false;
-        for(int i = 0;i<word.length();i++)
-        {
-            if(word[i] == '.')
-            {  bool f = false;
-                for(char ch = 'a';ch<='z';ch++)
-                {
-                    string s1 = word.substr(i+1,word.length()-1-i);
-                   
-                    if( search1(s1,tmp->link[ch-97]))return true;
-                }
-             if(!f) return false;
-            }
-            else
-            {
-                 int pos = word[i] - 97;
-                 if(tmp->link[pos] == NULL) return false;
-                tmp = tmp->link[pos];
-            }
-        }
-        return tmp->flag == true;
+        return curr && curr->isEndOfWord;
     }
 };
-
-/**
- * Your WordDictionary object will be instantiated and called as such:
- * WordDictionary* obj = new WordDictionary();
- * obj->addWord(word);
- * bool param_2 = obj->search(word);
- */
