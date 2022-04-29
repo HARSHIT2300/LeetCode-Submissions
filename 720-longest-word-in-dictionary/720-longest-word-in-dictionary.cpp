@@ -39,14 +39,16 @@ class Trie
      tmp->flag = true;
     }
     bool search(string s)
-    {   Node *tmp = root;
+    {  
+        Node* tmp = root;
         for(auto &el : s)
-        {   int ch_val= el-97;
-            if(tmp->links[ch_val] == NULL) return false;
-         tmp = tmp->links[ch_val];
+        {
+            int ch_val = el - 97;
+            tmp = tmp->links[ch_val];
+            if(tmp == NULL) return false;
+            if(tmp -> flag == false) return false;
         }
-     cout<<tmp->flag<<" "<<s<<"\n";
-     return tmp->flag == true;
+        return true;
     }
 };
 class Solution {
