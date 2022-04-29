@@ -63,6 +63,7 @@ public:
         return true;
     }
     string longestWord(vector<string>& words) {
+        sort(words.begin(),words.end());
         Trie* obj = new Trie();
         for(auto &s : words)
         {
@@ -76,7 +77,7 @@ public:
                 if(obj->search(s1))
                 {
                     if(s1.length() > ans.length()) ans = s1;
-                    else if(s1.length() == ans.length() && cmp_lxc(s1,ans)) ans = s1;
+                    
                 }
              else break;
             }
