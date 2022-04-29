@@ -45,7 +45,7 @@ class Trie
         {
             int ch_val = el - 97;
             tmp = tmp->links[ch_val];
-            if(tmp == NULL) return false;
+            //if(tmp == NULL) return false;
             if(tmp -> flag == false) return false;
         }
         return true;
