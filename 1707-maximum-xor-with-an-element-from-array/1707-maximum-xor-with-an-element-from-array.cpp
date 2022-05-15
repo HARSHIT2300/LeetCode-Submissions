@@ -2,11 +2,11 @@ class Node{
     public : 
     Node* links[2];
     int num;
-    // Node(){
-    //     for(int i=0;i<2;i++)
-    //         links[i] = NULL;
-    //     num = 0;
-    // }
+    Node(){
+        for(int i=0;i<2;i++)
+            links[i] = NULL;
+        num = 0;
+    }
 };
 Node* root;
 class Trie{
@@ -16,10 +16,12 @@ class Trie{
     }
     void insert(int n)
     {   Node *tmp = root;
-     
-       for(int bit = 31;bit>=0;bit--)
-       {    int b_val = (n>>bit) & 1;
-          
+        int n1 = 1<<30;
+        while(n1)
+        {
+          int b_val;
+            if(n&n1) b_val = 1;
+            else b_val = 0;
             if(tmp->links[b_val] != NULL) 
                 tmp = tmp->links[b_val];
             else
@@ -28,33 +30,41 @@ class Trie{
                 tmp->links[b_val] = tmp1;
                 tmp = tmp1;
             }
-           
+            n1>>=1;
         }
      tmp->num = n;
     }
     int  max_xor(int n)
     {
-      
+        int n1 = 1<<30;
         int ans=0;
        
         Node* tmp = root;
-       for(int bit = 31;bit>=0;bit--)
-       {    int b_val = (n>>bit) & 1;
+        while(n1)
+        {
+            int b_val_n;
+         
+            if(n&n1)
+                b_val_n = 1;
+            else 
+                b_val_n = 0;
+           // cout<<b_val_n;
           
-          
-                if(tmp->links[1 - b_val] == NULL)
-                    tmp = tmp->links[ b_val];
+                if(tmp->links[b_val_n ^ 1] == NULL)
+                    tmp = tmp->links[b_val_n];
                 else
                 {
-                   tmp = tmp->links[1 - b_val];
-                  
+                    tmp = tmp->links[b_val_n ^ 1];
+                    ans+=n1;
                 }
-       }  
-        return tmp->num ^ n;
-       // return 0;
+            
+          
+            n1>>=1;
+        }
+     //   cout<<"\n";
+        return ans;
     }
 };
-
 class Solution {
 public:
     vector<int> maximizeXor(vector<int>& nums, vector<vector<int>>& queries) {
