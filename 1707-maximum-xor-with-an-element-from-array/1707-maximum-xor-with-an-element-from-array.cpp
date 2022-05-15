@@ -34,34 +34,33 @@ class Trie{
         }
      tmp->num = n;
     }
-    int  max_xor(int n)
+    int  max_xor(int n )
     {
         int n1 = 1<<30;
         int ans=0;
-       
+        int f=0;
         Node* tmp = root;
         while(n1)
         {
             int b_val_n;
-         
+            int b_val_m;
             if(n&n1)
                 b_val_n = 1;
             else 
                 b_val_n = 0;
-           // cout<<b_val_n;
+            
           
                 if(tmp->links[b_val_n ^ 1] == NULL)
                     tmp = tmp->links[b_val_n];
                 else
                 {
                     tmp = tmp->links[b_val_n ^ 1];
-                    ans+=n1;
+                    ans+=n1; f = n1;
                 }
             
           
             n1>>=1;
         }
-     //   cout<<"\n";
         return ans;
     }
 };
