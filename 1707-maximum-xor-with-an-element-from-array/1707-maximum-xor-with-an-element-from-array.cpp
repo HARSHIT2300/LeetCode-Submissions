@@ -1,76 +1,88 @@
-#include<bits/stdc++.h>
-struct Node {
-    Node *links[2]; 
- 
-    bool containsKey(int ind) {
-        return (links[ind] != NULL); 
+class Node{
+    public : 
+    Node* links[2];
+    int num;
+    // Node(){
+    //     for(int i=0;i<2;i++)
+    //         links[i] = NULL;
+    //     num = 0;
+    // }
+};
+Node* root;
+class Trie{
+    public : 
+    Trie(){
+        root = new Node();
     }
-    Node* get(int ind) {
-        return links[ind]; 
-    }
-    void put(int ind, Node* node) {
-        links[ind] = node; 
-    }
-}; 
-class Trie {
-    private: Node* root; 
-public:
-    Trie() {
-        root = new Node(); 
-    }
-    
-    public: 
-    void insert(int num) {
-        Node* node = root;
-        // cout << num << endl; 
-        for(int i = 31;i>=0;i--) {
-            int bit = (num >> i) & 1; 
-            if(!node->containsKey(bit)) {
-                node->put(bit, new Node()); 
+    void insert(int n)
+    {   Node *tmp = root;
+     
+       for(int bit = 31;bit>=0;bit--)
+       {    int b_val = (n>>bit) & 1;
+          
+            if(tmp->links[b_val] != NULL) 
+                tmp = tmp->links[b_val];
+            else
+            {
+                Node *tmp1 = new Node();
+                tmp->links[b_val] = tmp1;
+                tmp = tmp1;
             }
-            node = node->get(bit); 
+           
         }
+     tmp->num = n;
     }
-    public:
-    int findMax(int num) {
-        Node* node = root; 
-        int maxNum = 0; 
-        for(int i = 31;i>=0;i--) {
-            int bit = (num >> i) & 1; 
-            if(node->containsKey(!bit)) {
-                maxNum = maxNum | (1<<i); 
-                node = node->get(!bit); 
-            }
-            else {
-                node = node->get(bit); 
-            }
-        }
-        return maxNum; 
+    int  max_xor(int n)
+    {
+      
+        int ans=0;
+       
+        Node* tmp = root;
+       for(int bit = 31;bit>=0;bit--)
+       {    int b_val = (n>>bit) & 1;
+          
+          
+                if(tmp->links[1 - b_val] == NULL)
+                    tmp = tmp->links[ b_val];
+                else
+                {
+                   tmp = tmp->links[1 - b_val];
+                  
+                }
+       }  
+        return tmp->num ^ n;
+       // return 0;
     }
 };
+
 class Solution {
 public:
     vector<int> maximizeXor(vector<int>& nums, vector<vector<int>>& queries) {
-     vector<int> ans(queries.size(), 0); 
-    vector<pair<int, pair<int,int>>> offlineQueries; 
-    sort(nums.begin(), nums.end()); 
-    int index = 0;
-    for(auto &it: queries) {
-        offlineQueries.push_back({it[1],{it[0], index++}}); 
-    }
-    sort(offlineQueries.begin(), offlineQueries.end()); 
-    int i = 0; 
-    int n = nums.size(); 
-    Trie trie; 
-    
-    for(auto &it : offlineQueries) {
-        while(i < n && nums[i] <= it.first) {
-            trie.insert(nums[i]); 
-            i++; 
+        Trie* obj = new Trie();
+        vector<pair<int,pair<int,int>>> queries1;
+       // cout<<queries.size()<<" ";
+        for(int j=0;j<queries.size();j++)
+        {
+            queries1.push_back({queries[j][1],{queries[j][0],j}});
         }
-        if(i!=0) ans[it.second.second] = trie.findMax(it.second.first); 
-        else ans[it.second.second] = -1; 
-    }
-    return ans; 
+     
+        sort(nums.begin(),nums.end());
+        sort(queries1.begin(),queries1.end());
+        vector<int> res(queries.size(),-1);
+        int i=0;
+        for(auto &p1 : queries1)
+        {
+           while(i<nums.size() && nums[i]<= p1.first)
+           {
+               obj->insert(nums[i]);
+               i++;
+           }
+            if(i)
+                res[p1.second.second] = obj->max_xor(p1.second.first);
+            else 
+                res[p1.second.second] = -1;
+        }
+     
+        return res;
     }
 };
