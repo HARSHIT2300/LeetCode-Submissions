@@ -1,69 +1,60 @@
 class Node{
     public : 
-    Node* link[27];
-    bool flag;
-    Node()
-    {
-        flag = false;
-        for(int i=0;i<26;i++)
+        Node* links[26];
+        bool flag;
+        Node()
         {
-            link[i] = NULL;
+            for(int i=0;i<26;i++)
+            {
+                links[i] = NULL;
+                flag = false;
+            }
+        }
+};
+Node* root;
+bool search1(string& word,int i,Node* tmp)
+{
+    if(i == word.size())
+    {
+        return tmp->flag;
+    }
+    if(word[i] != '.' && tmp->links[word[i]-97] != NULL)
+    {
+        if(search1(word,i+1,tmp->links[word[i]-97])) return true;
+    }
+    if(word[i] == '.')
+    {
+        for(char ch = 'a';ch<='z';ch++)
+        {
+            if(tmp->links[ch-97] != NULL)
+            if(search1(word,i+1,tmp->links[ch-97])) return true;
         }
     }
-};
-Node *root;
+    return false;
+}
 class WordDictionary {
 public:
     WordDictionary() {
-        root = new Node();
+        root  = new Node();
     }
     
     void addWord(string word) {
         Node* tmp = root;
-        
-        for(auto &el : word)
+        for(int i=0;i<word.size();i++)
         {
-          
-            int pos = el-97;
-            if(tmp->link[pos] == NULL)
-            {
-                Node *tmp1 = new Node();
-                tmp->link[pos] = tmp1;
-                tmp = tmp1;
-            }
+            if(tmp->links[word[i]-97] != NULL)
+                tmp = tmp->links[word[i]-97];
             else
-                tmp = tmp->link[pos];
-                
+            {
+                tmp->links[word[i]-97] = new Node();
+                tmp = tmp->links[word[i]-97];
+            }
         }
         tmp->flag = true;
     }
     
     bool search(string word) {
-        return search1(word.c_str(),root);
-    }
-    bool search1(const char *word,Node *tmp)
-    {
-        if(tmp == NULL) return false;
-        for(int i = 0;word[i];i++)
-        {
-            if(word[i] == '.')
-            {  bool f = false;
-                for(char ch = 'a';ch<='z';ch++)
-                {
-                    
-                   
-                    if(tmp->link[ch-97] && search1(&word[i+1],tmp->link[ch-97]))return true;
-                }
-             return false;
-            }
-            else
-            {
-                 int pos = word[i] - 97;
-                 if(tmp->link[pos] == NULL) return false;
-                tmp = tmp->link[pos];
-            }
-        }
-        return tmp->flag == true;
+       return  search1(word,0,root);
     }
 };
 
