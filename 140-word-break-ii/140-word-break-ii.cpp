@@ -42,21 +42,23 @@ class Trie{
 };
 void check(string s,int i,vector<string> &ans,Trie* obj,string prefix,string s1)
 {  
-    if(i == s.size())
-    {
-        if(obj->isPrefix(prefix))
-        {
-           // s1.pop_back();
-            ans.push_back(s1);
-        }
-        return ;
-    }
+    // if(i == s.size())
+    // {
+    //     if(obj->isPrefix(prefix))
+    //     {
+    //        // s1.pop_back();
+    //         ans.push_back(s1);
+    //     }
+    //     return ;
+    // }
     prefix+=s[i];
    //  cout<<prefix<<" "<<i<<"\n";
     if(obj->isPrefix(prefix))
     {
+        if(i == s.size()-1) { ans.push_back(s1+s[i]); return ;}
      check(s,i+1,ans,obj,"",s1+s[i]+" ");   
     }
+    if(i == s.size()-1) return ;
     check(s,i+1,ans,obj,prefix,s1+s[i]); 
 }
 class Solution {
