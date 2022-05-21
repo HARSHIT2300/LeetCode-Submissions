@@ -53,13 +53,14 @@ void check(string s,int i,vector<string> &ans,Trie* obj,string prefix,string s1)
     // }
     prefix+=s[i];
    //  cout<<prefix<<" "<<i<<"\n";
+    s1+=s[i];
     if(obj->isPrefix(prefix))
     {
-        if(i == s.size()-1) { ans.push_back(s1+s[i]); return ;}
-     check(s,i+1,ans,obj,"",s1+s[i]+" ");   
+        if(i == s.size()-1) { ans.push_back(s1); return ;}
+     check(s,i+1,ans,obj,"",s1+" ");   
     }
     if(i == s.size()-1) return ;
-    check(s,i+1,ans,obj,prefix,s1+s[i]); 
+    check(s,i+1,ans,obj,prefix,s1); 
 }
 class Solution {
 public:
