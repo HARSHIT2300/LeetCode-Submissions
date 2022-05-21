@@ -40,6 +40,7 @@ void check(int x,int y,Node *tmp,int m,int n,vector<vector<char>>& board,vector<
     {
         res.push_back(s);
         tmp->flag = 0;
+        // because now this is word is already considered and to avoid further repetations of the same word, set the flag to zero
     }
     board[x][y] = '.';
     check(x-1,y,tmp,m,n,board,res,s);
