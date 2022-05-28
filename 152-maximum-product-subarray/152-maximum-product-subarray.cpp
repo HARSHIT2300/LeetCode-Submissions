@@ -50,10 +50,7 @@ public:
                     p1*=p2; p2=1;
                     ans = max(p1,ans);
                 }
-                // else
-                // {
-                //     p2=1;
-                // }
+             
                 ct++;
             }
           //  cout<<ans<<" "<<p1<<" "<<p2<<"\n";
