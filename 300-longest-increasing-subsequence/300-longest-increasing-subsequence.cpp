@@ -18,7 +18,7 @@ void handler(int n,map<int,int> &mp)
     it--; int adv = it->second+1;
     it = mp.upper_bound(n);
     
-    if(it!= mp.end() && it->first>n) // if current element,n, is smaller than the upper bound of n , we remove the upper bound of n as  now with a smaller element ,i.e n we can have the same advantage and this seems like an more intuitive task that could possibily improve our chances of getting a larger lis while taking into consideration the subsequent unknown numbers that would coming in nums ....
+    if(it!= mp.end() ) // if current element,n, is smaller than the upper bound of n , we remove the upper bound of n as  now with a smaller element ,i.e n we can have the same advantage and this seems like an more intuitive task that could possibily improve our chances of getting a larger lis while taking into consideration the subsequent unknown numbers that would coming in nums ....
         mp.erase(it);
     
     mp[n] = adv;
