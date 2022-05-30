@@ -11,12 +11,12 @@ public:
         memset(poss,false,sizeof(poss));
         poss[0] = 1;
         for(int end = 1; end<=n; end++)
-        {
-            for(int start = 1; start<=end ; start++)
-            {
+        {   string s1= "";
+            for(int start = end; start>=1 ; start--)
+            {   s1 = s[start-1]+s1;
                 if(poss[start-1])
                 {
-                    if(mp[s.substr(start-1,end-start+1)]) {
+                    if(mp[s1]) {
                         poss[end] = 1;break;
                     }
                 }
