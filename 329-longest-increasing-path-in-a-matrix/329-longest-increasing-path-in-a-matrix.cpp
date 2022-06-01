@@ -9,13 +9,14 @@ int calc(int x,int y,int m,int n,vector<vector<int>>& matrix,vector<vector<int>>
   
     if(dp[x][y] != -1) return dp[x][y];
     int chx,chy;
+    dp[x][y] = 1;
     for(int i=0;i<4;i++)
     {
         chx = x  + ch[i][0]; chy = y  + ch[i][1];
         if(isValid(chx,chy,m,n) && matrix[chx][chy] > matrix[x][y])
             dp[x][y] = max(dp[x][y],calc(chx,chy,m,n,matrix,dp)+1);
     }
-    dp[x][y] = max(1,dp[x][y]);
+ //   dp[x][y] = max(1,dp[x][y]);
     return dp[x][y];
 }
 
