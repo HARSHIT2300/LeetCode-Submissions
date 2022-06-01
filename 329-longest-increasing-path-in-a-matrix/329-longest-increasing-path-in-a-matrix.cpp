@@ -19,7 +19,10 @@ int calc(int x,int y,int m,int n,vector<vector<int>>& matrix,vector<vector<int>>
  //   dp[x][y] = max(1,dp[x][y]);
     return dp[x][y];
 }
-
+// basically compute/consider the longest increasing path possible from each grid position, and return the max of these computed increasing paths as the answer....
+// so the time complexity will be O(m*n) bcoz already computed grids are not considered again...
+// dp[x][y] represents the longest increasing path starting from grid x,y .....
+// kind of  a variation of unique path + dfs on grids wala type
 class Solution {
 public:
     int longestIncreasingPath(vector<vector<int>>& matrix) {
