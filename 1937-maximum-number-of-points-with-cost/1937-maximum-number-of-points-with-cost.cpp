@@ -33,7 +33,7 @@ public:
             {
                 points[row+1][col]+=max(lmax[col],rmax[col]);
             }
-            cout<<points[row+1][0]<<" ";
+        //    cout<<points[row+1][0]<<" ";
         }
       //  cout<<m<<" "<<n<<"\n";
         for(int col = 0;col < n; col++)
