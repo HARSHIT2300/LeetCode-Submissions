@@ -37,7 +37,7 @@ public:
         }
       //  cout<<m<<" "<<n<<"\n";
         for(int col = 0;col < n; col++)
-        {   cout<<1<<" ";
+        {  // cout<<1<<" ";
             ans = max(ans,(long long int)points[m-1][col]);
           //  cout<<ans<<"\n";
         }
