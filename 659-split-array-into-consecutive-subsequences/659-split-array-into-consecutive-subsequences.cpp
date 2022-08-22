@@ -33,7 +33,7 @@ public:
         }
         for(int i=0;i<=l_idx;i++)
         {   auto el = v[i];
-            cout<<el<<" ";
+          //  cout<<el<<" ";
             if(el < 3) return false;
         }
         return true;
