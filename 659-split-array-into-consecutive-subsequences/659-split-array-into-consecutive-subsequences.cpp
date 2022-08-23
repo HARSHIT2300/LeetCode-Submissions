@@ -1,40 +1,36 @@
 class Solution {
 public:
     bool isPossible(vector<int>& nums) {
-        vector<int> v(10003,0);
-        int l_idx=0;
-        map<int,set<int>> mp;
-        v[0]=1; mp[nums[0]].insert(0);
-        int tot = 0;
-        for(int i=1;i<nums.size();i++)
+       map<int,int> count;
+        for(auto &el : nums)
         {
-            if(mp[nums[i]-1].size() == 0)
+            count[el]++;
+        }
+        int cnt = 0;
+        map<int,int> mp;
+        map<int,int> cons;
+        for(int i=0;i<nums.size();i++)
+        {
+       //     if(cons[i]) continue;
+         //   cons[i]+=1;
+           
+            auto el = nums[i];
+             if(count[el] == 0)continue;
+            if(!mp[el])
             {
-                ++l_idx;
-                v[l_idx]+=1;
-                mp[nums[i]].insert(l_idx);
+                if(count[el+1] && count[el+2])
+                {   count[el]--;
+                    count[el+1]--;
+                    count[el+2]--;
+                    mp[el+3]++;
+                }
+                else return false;
             }
             else
             {
-                set<int> s = mp[nums[i]-1];
-                int id = *(s.begin());
-                int mn = v[id];
-                for(auto &el : s)
-                {
-                    if(v[el] <= mn)
-                    {
-                        mn = v[el];
-                        id = el;
-                    }
-                }
-                mp[nums[i]].insert(id);
-                v[id]+=1;
-                if(v[id] == 3) tot++;
-                mp[nums[i]-1].erase(mp[nums[i]-1].find(id));
+                if(count[el]) {count[el]--;mp[el]--; mp[el+1]++;}
             }
         }
-      //  cout<<tot<<" "<<l_idx<<" ";
-       return tot-1 == l_idx;
-        //return true;
+        return  true;
     }
 };
