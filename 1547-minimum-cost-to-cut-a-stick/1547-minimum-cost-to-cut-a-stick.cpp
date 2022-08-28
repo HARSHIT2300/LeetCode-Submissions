@@ -7,10 +7,10 @@ public:
         int ans = INT_MAX;
         for(int i=l+1;i<r;i++)
         {
-            if(vis[i]) continue;
+         //   if(vis[i]) continue;
             vis[i] = 1;
             ans = min(ans, cuts[r] - cuts[l] + calc(l,i,vis,cuts,dp) + calc(i,r,vis,cuts,dp));
-            vis[i] = 0;
+         //   vis[i] = 0;
         }
         dp[l][r] = ans == INT_MAX ? 0 : ans;
         return dp[l][r];
