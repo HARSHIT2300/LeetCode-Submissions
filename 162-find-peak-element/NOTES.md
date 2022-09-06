@@ -1,0 +1,1 @@
+Just had to think about a slight observation given in the question
