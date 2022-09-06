@@ -19,7 +19,7 @@ public:
         if(val == v.back()) v.pop_back();
         else
         {
-            v[mp[val]] = v[v.size()-1];
+            v[mp[val]] = v.back();
             mp[v.back()] = mp[val];
             v.pop_back();
         }
